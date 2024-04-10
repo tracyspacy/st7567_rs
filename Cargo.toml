@@ -1,0 +1,15 @@
+[package]
+authors = ["tracyspacy"]
+name = "st7567_rs"
+version = "0.1.0"
+edition = "2021"
+resolver = "2"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+embedded-hal = { package = "embedded-hal", version = "1.0" }
+embedded-graphics-core = "0.4.0"
+
+
+[profile.release]
+debug = 2
