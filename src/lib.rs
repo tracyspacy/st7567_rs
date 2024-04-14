@@ -17,23 +17,27 @@ pub enum DisplayErrors {
     OutOfBoundsError((usize, usize)),
 }
 
-pub struct ST7567<PIN, SPI>
+pub struct ST7567<DC, BL, RST, SPI>
 where
-    PIN: OutputPin,
+    DC: OutputPin,
+    BL: OutputPin,
+    RST: OutputPin,
     SPI: SpiDevice,
 {
-    dcx: PIN,
-    blx: PIN,
-    rst: PIN,
+    dcx: DC,
+    blx: BL,
+    rst: RST,
     spi_d: SPI,
     buffer: [u8; constants::BUFFER_SIZE],
 }
-impl<PIN, SPI> ST7567<PIN, SPI>
+impl<DC, BL, RST, SPI> ST7567<DC, BL, RST, SPI>
 where
-    PIN: OutputPin,
+    DC: OutputPin,
+    BL: OutputPin,
+    RST: OutputPin,
     SPI: SpiDevice,
 {
-    pub fn new(_dcx: PIN, _blx: PIN, _rst: PIN, _display_spi: SPI) -> Self {
+    pub fn new(_dcx: DC, _blx: BL, _rst: RST, _display_spi: SPI) -> Self {
         Self {
             dcx: _dcx,
             blx: _blx,
@@ -138,9 +142,11 @@ where
 
 use embedded_graphics_core::{draw_target::DrawTarget, pixelcolor::BinaryColor, prelude::*, Pixel};
 
-impl<PIN, SPI> DrawTarget for ST7567<PIN, SPI>
+impl<DC, BL, RST, SPI> DrawTarget for ST7567<DC, BL, RST, SPI>
 where
-    PIN: OutputPin,
+    DC: OutputPin,
+    BL: OutputPin,
+    RST: OutputPin,
     SPI: SpiDevice,
 {
     type Color = BinaryColor;
@@ -156,9 +162,11 @@ where
     }
 }
 
-impl<PIN, SPI> OriginDimensions for ST7567<PIN, SPI>
+impl<DC, BL, RST, SPI> OriginDimensions for ST7567<DC, BL, RST, SPI>
 where
-    PIN: OutputPin,
+    DC: OutputPin,
+    BL: OutputPin,
+    RST: OutputPin,
     SPI: SpiDevice,
 {
     fn size(&self) -> Size {
