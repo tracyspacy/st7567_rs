@@ -156,7 +156,7 @@ where
         I: IntoIterator<Item = Pixel<Self::Color>>,
     {
         for Pixel(Point { x, y }, color) in pixels.into_iter() {
-            self.set_pixel(x as usize, y as usize, true);
+            self.set_pixel(x as usize, y as usize, color.is_on());
         }
         Ok(())
     }
