@@ -17,8 +17,8 @@ pub enum ScreenDirection {
 }
 
 pub enum Bias {
-    Bias7_1,
-    Bias9_1,
+    Bias1_7,
+    Bias1_9,
 }
 
 #[derive(Debug)]
@@ -66,8 +66,8 @@ where
         self.reset()?;
         let commands: [u8; 10] = [
             match self.bias {
-                Bias::Bias7_1 => constants::ST7567_BIAS_1_7,
-                Bias::Bias9_1 => constants::ST7567_BIAS_1_9,
+                Bias::Bias1_7 => constants::ST7567_BIAS_1_7,
+                Bias::Bias1_9 => constants::ST7567_BIAS_1_9,
             },
             match self.screen_direction {
                  ScreenDirection::Normal => constants::ST7567_SEG_DIR_NORMAL,
